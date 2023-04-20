@@ -100,3 +100,20 @@ f4 n q = f4aux (2 * n) q n
 f4aux :: Integer -> Integer -> Integer -> Integer
 f4aux n q i | i == n = q^n
             | otherwise = q^n + f4aux (n - 1) q i 
+
+-- 11)
+
+
+-- 14) Implementar sumaPotencias que dados 3 naturales suma todas las potencias de la forma q^(a+b)
+
+
+sumaPotencias :: Integer -> Integer -> Integer -> Integer
+sumaPotencias q n m | n == 1 = sumaPotenciasAux q 1 m
+                    | otherwise = sumaPotencias q (n-1) m + sumaPotenciasAux q n m
+
+sumaPotenciasAux :: Integer -> Integer -> Integer -> Integer
+sumaPotenciasAux q n m | m == 1 = q^(n+m)
+                       | otherwise = q^(n+m) + sumaPotenciasAux q n (m-1)
+
+
+-- 21 )
