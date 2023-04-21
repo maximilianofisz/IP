@@ -103,17 +103,72 @@ f4aux n q i | i == n = q^n
 
 -- 11)
 
+--a)
 
--- 14) Implementar sumaPotencias que dados 3 naturales suma todas las potencias de la forma q^(a+b)
+factorial :: Float -> Float
+factorial n | n == 0 = 1
+            | otherwise = n * (factorial (n - 1))
 
+
+eAprox :: Integer -> Float
+eAprox n | n == 0 = 1 / (factorial (fromIntegral n))
+         | otherwise =  (1 / factorial (fromIntegral n)) + eAprox (n - 1)
+
+-- b)
+
+e :: Float
+e = eAprox 10
+
+-- 12)
+
+raizDe2Aprox :: Integer -> Float
+raizDe2Aprox n | n == 1 = 1
+               | otherwise = (raizDe2AproxSuc n) - 1
+
+raizDe2AproxSuc :: Integer -> Float
+raizDe2AproxSuc n | n == 1 = 2
+                  | otherwise = 2 + (1 / ((raizDe2AproxSuc (n- 1)))) 
+
+-- 13)
+
+f13 :: Integer -> Integer -> Integer
+f13 n m | n == 1 = f13Aux n m
+f13 n m | otherwise = f13Aux n m + f13 (n - 1) m
+
+
+f13Aux :: Integer -> Integer -> Integer
+f13Aux n m | m == 1 = n^m
+           | otherwise = n^m + f13Aux n (m - 1)
+
+-- 14) 
 
 sumaPotencias :: Integer -> Integer -> Integer -> Integer
 sumaPotencias q n m | n == 1 = sumaPotenciasAux q 1 m
-                    | otherwise = sumaPotencias q (n-1) m + sumaPotenciasAux q n m
+                    | otherwise = sumaPotenciasAux q n m + sumaPotencias q (n - 1) m
+
 
 sumaPotenciasAux :: Integer -> Integer -> Integer -> Integer
-sumaPotenciasAux q n m | m == 1 = q^(n+m)
-                       | otherwise = q^(n+m) + sumaPotenciasAux q n (m-1)
+sumaPotenciasAux q n m | m == 1 = q^(n + m)
+                       | otherwise = q^(n + m) + sumaPotenciasAux q n (m - 1)
+
+-- 15)
+
+sumaRacionales :: Integer -> Integer -> Float
+sumaRacionales p q | p == 1 = sumaRacionalesAux p q
+                   | otherwise = sumaRacionalesAux p q + sumaRacionales (p - 1) q
+
+
+sumaRacionalesAux :: Integer -> Integer -> Float
+sumaRacionalesAux p q | q == 1 = fromInteger p
+                      | otherwise = (fromInteger p) / (fromInteger q) + sumaRacionalesAux p (q - 1)
+
+
+
+
+
+
+
+
 
 
 -- 21 )
