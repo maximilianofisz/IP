@@ -163,8 +163,37 @@ sumaRacionalesAux p q | q == 1 = fromInteger p
                       | otherwise = (fromInteger p) / (fromInteger q) + sumaRacionalesAux p (q - 1)
 
 
+-- 16)
+
+menorDivisor :: Integer -> Integer
+menorDivisor n = menorDivisorAux n 2
+
+menorDivisorAux :: Integer -> Integer -> Integer
+menorDivisorAux n i | mod n i == 0 = i
+                    | n == i = n
+                    | otherwise = menorDivisorAux n (i+1)
+
+esPrimo :: Integer -> Bool
+esPrimo n | menorDivisor n == n = True
+          | otherwise = False
+
+sonCoprimos :: Integer -> Integer -> Bool
+sonCoprimos a b | mcd a b == 1 = True
+                | otherwise = False
 
 
+mcd :: Integer -> Integer -> Integer
+mcd a b | a == b = 1
+        | mod a b == 0 = b
+        | otherwise = mcd b (mod a b)
+
+nEsimoPrimo :: Integer -> Integer
+nEsimoPrimo n = nEsimoPrimoAux n 2 0
+
+nEsimoPrimoAux :: Integer -> Integer -> Integer -> Integer
+nEsimoPrimoAux n i c | n == c = (i-1)
+                     | esPrimo i = nEsimoPrimoAux n (i+1) (c+1)
+                     | esPrimo i == False = nEsimoPrimoAux n (i+1) c
 
 
 
