@@ -195,9 +195,29 @@ nEsimoPrimoAux n i c | n == c = (i-1)
                      | esPrimo i = nEsimoPrimoAux n (i+1) (c+1)
                      | esPrimo i == False = nEsimoPrimoAux n (i+1) c
 
+-- 17)
+
+esFibonacci :: Integer -> Bool
+esFibonacci n = esFibonacciAux n 0
+
+esFibonacciAux :: Integer -> Integer -> Bool
+esFibonacciAux n i | n == fibonacci i = True
+                   | n < fibonacci i = False
+                   | otherwise = esFibonacciAux n (i+1)
 
 
+-- 18) 
+mayorDigitoPar :: Integer -> Integer
+mayorDigitoPar n = mayorDigitoParAux n (-1) (cantDigitos n)
 
+mayorDigitoParAux :: Integer -> Integer -> Integer -> Integer
+mayorDigitoParAux n c d | d == 0 = c
+                        | esPar (mod n 10) = mayorDigitoParAux (div n 10) (mod n 10) (d-1)
+                        | otherwise = mayorDigitoParAux (div n 10) c (d-1)
+
+esPar :: Integer -> Bool
+esPar n | mod n 2 == 0 = True
+        | otherwise = False
 
 
 -- 21 )
