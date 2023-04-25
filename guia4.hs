@@ -219,5 +219,42 @@ esPar :: Integer -> Bool
 esPar n | mod n 2 == 0 = True
         | otherwise = False
 
+-- 19)
+
+esSumaInicialDePrimos :: Integer  -> Bool
+esSumaInicialDePrimos n = esSumaInicialDePrimosAux n 2 1
+
+esSumaInicialDePrimosAux :: Integer -> Integer -> Integer -> Bool
+esSumaInicialDePrimosAux n s i | n == s = True
+                               | s > n = False
+                               | otherwise = esSumaInicialDePrimosAux n (s + (nEsimoPrimo(i+1))) (i+1)
+
+
+-- 20)
+
+tomaValorMax :: Integer -> Integer -> Integer
+tomaValorMax n1 n2  = tomaValorMaxAux n1 n2 n1
+
+tomaValorMaxAux :: Integer -> Integer -> Integer -> Integer
+tomaValorMaxAux n1 n2 m | sumaDivisores m == maxEntreDivisores n1 n2 0 = m
+                        | m == n2 = m
+                        | otherwise = tomaValorMaxAux n1 n2 (m+1)
+
+
+maxEntreDivisores :: Integer -> Integer -> Integer -> Integer
+maxEntreDivisores n1 n2 max | n1 == n2 && (sumaDivisores n2) > max = (sumaDivisores n2)
+                            | n1 == n2 = max
+                            | sumaDivisores n1 >= sumaDivisores (n1+1) = maxEntreDivisores (n1+1) n2 (sumaDivisores n1)
+                            | otherwise = maxEntreDivisores (n1+1) n2 max 
+
+sumaDivisores :: Integer -> Integer
+sumaDivisores m | m == 1 = 1
+                | otherwise = sumaDivisoresAux m 1 2
+
+sumaDivisoresAux :: Integer -> Integer -> Integer -> Integer
+sumaDivisoresAux m s i | m == i = (s+i) 
+                       | mod m i == 0 = sumaDivisoresAux m (s+i) (i+1)
+                       | otherwise = sumaDivisoresAux m s (i+1)
+
 
 -- 21 )
