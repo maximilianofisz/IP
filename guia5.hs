@@ -224,4 +224,71 @@ aplanarConBlancos (x:xs) | longitud xs == 0 = aplanarAux x
 
 -- 7.
 aplanarConNBlancos :: [[Char]] -> Integer -> [Char]
-aplanarConNBlancos 
+aplanarConNBlancos (x:xs) n | longitud xs == 0 = aplanarAux x
+                            | otherwise = aplanarAux x ++ (agregarBlancos n) ++ aplanarConNBlancos xs n
+
+
+agregarBlancos :: Integer -> [Char]
+agregarBlancos n | n == 0 = []
+                 | otherwise = [' '] ++ agregarBlancos (n-1)
+
+
+-- 5)
+
+-- 1.
+nat2Bin :: Integer -> [Integer]
+nat2Bin n | n < 2 = [n]
+          | otherwise = nat2Bin (div n 2) ++ [mod n 2] 
+
+
+-- 2.
+bin2nat :: [Integer] -> Integer
+bin2nat n = bin2natAux n ((longitud n) -1)
+
+bin2natAux :: [Integer] -> Integer -> Integer
+bin2natAux (x:xs) n | n == 0 = x * (2^n)
+                    | otherwise = (x * (2^n)) + bin2natAux xs (n-1)
+
+-- 3.
+nat2hex :: Integer -> [Char]
+nat2hex n | div n 16 == 0 =  [mapN2Hex (mod n 16)]
+          | otherwise = nat2hex (div n 16) ++ [mapN2Hex (mod n 16)] 
+
+mapN2Hex :: Integer -> Char
+mapN2Hex 0 = '0'
+mapN2Hex 1 = '1'
+mapN2Hex 2 = '2'
+mapN2Hex 3 = '3'
+mapN2Hex 4 = '4'
+mapN2Hex 5 = '5'
+mapN2Hex 6 = '6'
+mapN2Hex 7 = '7'
+mapN2Hex 8 = '8'
+mapN2Hex 9 = '9'
+mapN2Hex 10 = 'A'
+mapN2Hex 11 = 'B'
+mapN2Hex 12 = 'C'
+mapN2Hex 13 = 'D'
+mapN2Hex 14 = 'E'
+mapN2Hex 15 = 'F'
+mapN2Hex 16 = '0'
+mapN2Hex n | n > 16 = mapN2Hex (n-16)
+
+-- 4. 
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada x = sumaAcumuladaAux x 0
+
+sumaAcumuladaAux :: (Num t) => [t] -> t -> [t]
+sumaAcumuladaAux (x:xs) c | longitud xs == 0 = [c+x]
+                          | otherwise = [c+x] ++ sumaAcumuladaAux xs (c+x)
+
+--5.
+descomponerEnPrimos :: [Integer] -> [[Integer]]
+descomponerEnPrimos (x:xs) | longitud xs == 0 = [descomponerEnPrimosAux x 2]
+                           | otherwise = [descomponerEnPrimosAux x 2] ++ descomponerEnPrimos xs
+
+
+descomponerEnPrimosAux :: Integer -> Integer -> [Integer]
+descomponerEnPrimosAux n d | n == d = [n]
+                           | mod n d /= 0 = descomponerEnPrimosAux n (d+1)
+                           | otherwise = [d] ++ descomponerEnPrimosAux (div n d) d
