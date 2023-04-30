@@ -1,3 +1,4 @@
+
 -- 1) 
 
 --1.
@@ -292,3 +293,27 @@ descomponerEnPrimosAux :: Integer -> Integer -> [Integer]
 descomponerEnPrimosAux n d | n == d = [n]
                            | mod n d /= 0 = descomponerEnPrimosAux n (d+1)
                            | otherwise = [d] ++ descomponerEnPrimosAux (div n d) d
+
+-- 6)
+-- 1.
+
+type Set = []
+
+agregarATodos :: Integer -> Set (Set Integer) -> Set (Set Integer)
+agregarATodos n (x:xs) | longitud xs == 0 = [n : x]
+                       | otherwise = [n : x] ++ agregarATodos n xs
+
+-- 2.
+partes :: Integer -> Set (Set Integer)
+partes n | n == 0 = [[]]
+         | otherwise = agregarATodos n (partes (n - 1)) ++ partes (n-1)
+
+-- 3.
+
+productoCartesiano :: Set Integer -> Set Integer -> Set (Integer, Integer)
+productoCartesiano x (y:ys) | longitud ys == 0 = productoCartesianoAux y x
+                                 | otherwise = productoCartesianoAux y x ++ productoCartesiano x ys
+
+productoCartesianoAux :: Integer -> Set Integer -> Set (Integer, Integer)
+productoCartesianoAux n (x:xs) | longitud xs == 0 = [(x,n)]
+                               | otherwise = [(x,n)] ++ productoCartesianoAux n xs
