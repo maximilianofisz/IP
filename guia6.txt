@@ -1,0 +1,24 @@
+Ej 1
+1. Asegurarse de que el software hace lo que se espera de el.
+2. No necesariamente, testing nos asegura de que el software funciona correctamente para ciertos casos pero no nos asegura
+de que funciona para todos, ya que no podemos probar todos los casos.
+3. Consiste en testear el software segun su especificacion y no sobre su implementacion. 
+4. NO. Es necesaria la especificacion para saber que casos testear.
+
+Ej 2
+1. Los factores son los 3 enteros del programa que representan la longitud de los lados del triangulo
+2. Si. La suma de dos de los factores debe mayor a la longitud del tercero.
+3. Para los 3 factores individualmente, no se distinguen caracteristicas interesantes
+   Pero, para dos o tres de ellos podemos preguntarnos, ¿Son iguales?
+4. Para cualquiera de la combinaciones de 2 o 3 factores, tenemos las choices: 'Si' o 'No'
+5. 
+
+Ej 3
+
+- test 1: x = e  Expected = 2
+- test 2: x = -10. Expected = -10
+- test 3: x = 10. Expected = 10
+- test 4: x = 5,5. Expected = 5
+- test 5: x = pi. Expected = 3
+
+
