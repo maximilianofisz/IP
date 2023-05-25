@@ -173,13 +173,35 @@ def delorean_ls_swapped(partida:int, llegada:int):
         print(f"Viajo un año al pasado, estamos en el año {partida}")
 
 
-#Ej 1
+#Ej 7
 #1.
 def for_1_al_10():
     for num in range(1,11):
         print(num)
 
-def for
+#2.
+def for_pares_1_al_40():
+    for num in range(10,41,2):
+        print(num)
 
+#3.
+def for_ecos():
+    for num in range(0,10):
+        print("eco")
 
-for_1_al_10()
+#4.
+def for_cohete(numero:int):
+    for num in reversed(range(1,numero+1)):
+        print(num)
+    print("Despegue")
+
+#5.
+def for_delorean(partida:int, llegada:int):
+    for num in reversed(range(llegada,partida)):
+        print(f"Viajo un año al pasado, estamos en el año {num}")
+
+#6.
+def for_delorean_ls_swapped(partida:int):
+    for num in reversed(range(-384,partida,20)):
+        print(f"Viajo un año al pasado, estamos en el año {num}")
+
