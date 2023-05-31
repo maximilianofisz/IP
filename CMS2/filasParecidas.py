@@ -4,9 +4,17 @@ from typing import List
 # l: List[int]  <--Este es un ejemplo para una lista de enteros.
 # Respetar esta sintaxis, ya que el CMS dirá que no pasó ningún test si usan otra notación.
 def filasParecidas(matriz: List[List[int]]) -> bool :
-  # Implementar esta funcion
+  for i in range(len(matriz)-1):
+    currentDelta:int = abs(matriz[i][0] - matriz[i+1][0])
+    for j in range(len(matriz[i])):
+      if(abs(matriz[i][j]-matriz[i+1][j]) != currentDelta):
+        return False
   return True
 
+def abs(num:int) -> int:
+  return int((num*num)**(1/2))
+  
+print(filasParecidas([[1]]))
 
 #if __name__ == '__main__':
 #  filas = int(input())
