@@ -1,3 +1,4 @@
+import numpy
 #Ej 1
 #1.
 def pertenece(elem:int, lista:[int]) -> bool:
@@ -10,54 +11,6 @@ def pertenece(elem:int, lista:[int]) -> bool:
 def divideATodos(elem:int, lista:[int]) -> bool:
     for i in range(len(lista)):
         if(lista[i] % elem != 0):
-import numpy
-#2.
-def sube():
-    flag:bool = True
-    history = []
-    while(flag):
-        for line in history:
-            print(line[0] + " " + line[1])
-        operation = input("C = Cargar; D = Descontar; X = Salir\n")
-        if(operation == "C"):
-            amount:int = input("Cuanto?\n")
-            history.append(("C", amount))
-        if(operation == "D"):
-            amount:int = input("Cuanto?\n")
-            history.append(("D", amount))
-        if(operation == "X"):
-            flag = False
-
-# Ej 4
-def pertenece(x:int,y:[int])->bool:
-    for i in y:
-        if x==i:
-            return True
-        else: 
-            return False
-
-
-#1.
-def perteneceACadaUno(elem:int, seq:[[int]]) -> [bool]:
-    response:[bool] = []
-    for list in seq:
-        if(pertenece(elem, list)):
-            response.append(True)
-        else:
-            response.append(False)
-    print(response)
-
-#2.
-def esMatriz(seq:[[int]]) -> bool:
-    if(len(seq) == 0):
-        return False
-    if(len(seq[0]) == 0):
-        return False
-    size:int = len(seq[0])
-    for list in seq:
-        if(len(list) != size):
-            return False
-    return True
 
 #3.
 def sumaTotal(lista:[int]) -> int:
@@ -113,7 +66,6 @@ def tieneNumero(contra:str) -> bool:
             return True
     return False
 
-
 def contraseña(contra:str) -> str:
     if(len(contra) < 5):
         return "ROJA"
@@ -143,6 +95,7 @@ def vocales_distintas(palabra:str) -> bool:
     if(contador >= 3):
         return True
     return False
+
 
 #Ej 2
 #1.
@@ -223,14 +176,56 @@ def mis_estudiantes() -> [str]:
     return estudiantes
 
 #2.
+#2.
+def sube():
+    flag:bool = True
+    history = []
+    while(flag):
+        for line in history:
+            print(line[0] + " " + line[1])
+        operation = input("C = Cargar; D = Descontar; X = Salir\n")
+        if(operation == "C"):
+            amount:int = input("Cuanto?\n")
+            history.append(("C", amount))
+        if(operation == "D"):
+            amount:int = input("Cuanto?\n")
+            history.append(("D", amount))
+        if(operation == "X"):
+            flag = False
 
-print(mis_estudiantes())
-def ordenados(x:list)->bool:
-    for i in range(len(x)-1):
-        if x[i]>=x[i+1]:
-            return False 
+
+
+# Ej 4
+def pertenece(x:int,y:[int])->bool:
+    for i in y:
+        if x==i:
+            return True
+        else: 
+            return False
+
+#1.
+def perteneceACadaUno(elem:int, seq:[[int]]) -> [bool]:
+    response:[bool] = []
+    for list in seq:
+        if(pertenece(elem, list)):
+            response.append(True)
+        else:
+            response.append(False)
+    print(response)
+
+#2.
+def esMatriz(seq:[[int]]) -> bool:
+    if(len(seq) == 0):
+        return False
+    if(len(seq[0]) == 0):
+        return False
+    size:int = len(seq[0])
+    for list in seq:
+        if(len(list) != size):
+            return False
     return True
 
+#3.
 def filasOrdenadas(seq:[[int]]) -> [bool]:
     response:[bool] = []
     for list in seq:
@@ -240,7 +235,7 @@ def filasOrdenadas(seq:[[int]]) -> [bool]:
             response.append(False)
     print(response)
 
-
+#4.
 def elevar_matriz(size:int, power:float) -> [[int]]:
     matrix:[[int]] = numpy.random.random((size, size))
     answer:[[int]] = []

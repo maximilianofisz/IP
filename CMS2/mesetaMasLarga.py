@@ -17,8 +17,8 @@ def mesetaMasLarga(l: List[int]) -> int :
     elif(i == len(l)-1):
       if(l[i] == l[i-1]):
         currentSize = currentSize + 1
-        if(currentSize > record):
-          record = currentSize
+      if(currentSize > record):
+        record = currentSize
     elif(l[i] == l[i-1]):
       currentSize = currentSize + 1
     else:
@@ -28,8 +28,6 @@ def mesetaMasLarga(l: List[int]) -> int :
   return record
 
 
-print(mesetaMasLarga([]))
-
-#if __name__ == '__main__':
-#  x = input()
-#  print(mesetaMasLarga([int(j) for j in x.split()]))
+if __name__ == '__main__':
+  x = input()
+  print(mesetaMasLarga([int(j) for j in x.split()]))
