@@ -51,5 +51,14 @@ def revertirArchivo(nombre_archivo:str):
         print(line)
         nuevo.write(line)
             
+#Ej 4
+def agregarFraseAlFinal(nombre_archivo:str, frase:str):
+    archivo = open(nombre_archivo, "+a")
+    archivo.write("\n"+frase)
 
-revertirArchivo("test.txt")
+#Ej 5
+def agregarFraseAlPrincipio(nombre_archivo:str, frase:str):
+    archivo = open(nombre_archivo, "w")
+    
+
+agregarFrase("test.txt", "No lo soñeeeee eee\nJIJIJI")
