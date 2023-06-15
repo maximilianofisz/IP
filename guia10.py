@@ -1,6 +1,8 @@
 import csv
 from random import sample
+import random
 from queue import LifoQueue as Pila
+from queue import Queue as Cola
 
 #Ej 1
 #1.
@@ -88,8 +90,11 @@ def promedioNotasCSV(nombre_archivo:str, inLu: int) -> int:
 
 #Ej 8
 def generarNrosAlAzar(cantidad:int, desde:int, hasta:int) -> list[int]:
-    numbers: list[int] = range(desde, hasta)
-    return sample(numbers, cantidad)
+    numbers: list[int] = []
+    while(cantidad > 0):
+        numbers.append(random.randint(desde, hasta))
+        cantidad = cantidad - 1
+    return numbers
 
 #Ej 9
 def generarPilaAlAzar() -> Pila:
@@ -116,8 +121,87 @@ def buscarElMaximo(pila: Pila) -> int:
     return maximo
 
 pila: Pila =  generarPilaAlAzar()
-print(buscarElMaximo(pila))
 
 #Ej 12: Ni en pedo
 
 #Ej 13
+def generarColaAlAzar() -> Cola:
+    cola: Cola = Cola()
+    numeros: list[int] = generarNrosAlAzar(10,1,10)
+    for numero in numeros:
+        cola.put(numero)
+    return cola
+
+cola: Cola = generarColaAlAzar()
+#Ej 14
+def cantidadElementosCola(cola: Cola) -> int:
+    cantidad:int = 0
+    while(not(cola.empty())):
+        cantidad = cantidad + 1
+        cola.get()
+    return cantidad
+
+#Ej 15
+def buscarElMaximoCola(cola: Cola) -> int:
+    maximo:int = 0
+    while(not(cola.empty())):
+        removed:int = cola.get()
+        if(removed > maximo):
+            maximo = removed
+    return maximo
+
+#Ej 16
+#1.
+def armarSecuenciaDeBingo() -> Cola[int]:
+    secuencia = generarNrosAlAzar(99,0,99)
+    cola: Cola = Cola()
+    for numero in secuencia:
+        cola.put(numero)        
+    return cola
+
+#2.
+def jugarCartonDeBingo(carton: list[int], bolillero: Cola[int]) -> int:
+    jugadas:int = 0
+    while(len(carton) > 0):
+        jugada = bolillero.get()
+        if(jugada in carton):
+            carton.remove(jugada)
+            jugadas = jugadas + 1
+        else:
+            jugadas = jugadas + 1
+    return jugadas
+    
+
+
+#Ej 17
+def nPacientesUrgentes(cola: Cola[int]) -> int:
+    numeroUrgentes: int = 0
+    while(not(cola.empty())):
+        if(cola.get() < 4):
+            numeroUrgentes = numeroUrgentes + 1
+    return numeroUrgentes
+
+
+#Ej 18
+def agruparPorLongitud(nombre_archivo:str) -> dict:
+    archivo = open(nombre_archivo)
+    response: dict = {}
+    lines = archivo.readlines()
+    for line in lines:
+        line = separarPalabras(line)
+        for palabra in line:
+            if(len(palabra) not in response.keys()):
+                response[len(palabra)] = 1
+            else:
+                response[len(palabra)] = response[len(palabra)] + 1 
+            
+    print(response)
+
+def separarPalabras(palabras: str) -> list[str]:
+    palabras = palabras.replace("\n","")
+    response: list[str] = palabras.split(" ")
+    return response
+
+
+
+agruparPorLongitud("test.txt")
