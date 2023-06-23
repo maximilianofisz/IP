@@ -6,35 +6,76 @@ def avanzarFila(fila: Queue, min: int):
 
   # Quiero modelar un sistema para precedir quien va a atender a el siguiente de la cola
   # para cualquier minuto y ahi decidir que se hace. CONGRUENCIAAAA
-
+   
+  currentTime:int = 0
+  removed:int = 0
+  removedTime:int = 0
+  ultimoAgregado = fila.qsize()
   
-  if(min % 10 == 1) {
-    fila.get()
-  }
-  
+  while(min + 1 > currentTime):
+    if(currentTime == removedTime and currentTime != 0):
+      ultimoAgregado = ultimoAgregado + 1
+      fila.put(removed)
+      currentTime = currentTime + 1
+      continue
 
-  return 0
+    if(currentTime == 0):
+      ultimoAgregado = ultimoAgregado + 1
+      fila.put(fila.qsize() + 1)
+      currentTime = currentTime + 1
+      continue
+
+    if(currentTime != 0 and (currentTime-1) % 4 == 3):
+      fila.put(ultimoAgregado + 1)
+      ultimoAgregado = ultimoAgregado + 1
+      currentTime = currentTime + 1
+      continue
+
+    if(currentTime % 10 == 1 and fila.qsize() > 0):
+      fila.get()
+      currentTime = currentTime + 1
+      continue
+
+    if(currentTime % 10 == 2 and fila.qsize() > 0):
+      removed = fila.get()
+      removedTime = currentTime + 3
+      currentTime = currentTime + 1
+      continue
+
+    if(currentTime % 10 == 3 and fila.qsize() > 0):
+      fila.get()
+      currentTime = currentTime + 1
+      continue
+    
+    else:
+      currentTime = currentTime + 1
+  return fila
 
 
+#lista_gente: list[int] = []
 
-lista_gente: list[int] = [1,2,3,4]
+#fila: Queue = Queue()
+#[fila.put(p) for p in lista_gente]
 
-fila: Queue = Queue()
-[fila.put(p) for p in lista_gente]
+def ColaAFila(fila: Queue):
+  list = []
+  while(fila.qsize() > 0):
+    list.append(fila.get())
+  return list
 
-avanzarFila(fila, 0)
+#print(ColaAFila(avanzarFila(fila, 15)))
 
-#if __name__ == '__main__':
-#  fila: Queue = Queue()
-#  fila_inicial: int = int(input())
-#  for numero in range(1, fila_inicial+1):
-#    fila.put(numero)
-#  min: int = int(input())
-#  avanzarFila(fila, min)
-#  res = []
-#  for i in range(0, fila.qsize()):
-#    res.append(fila.get())
-#  print(res)
+if __name__ == '__main__':
+  fila: Queue = Queue()
+  fila_inicial: int = int(input())
+  for numero in range(1, fila_inicial+1):
+    fila.put(numero)
+  min: int = int(input())
+  avanzarFila(fila, min)
+  res = []
+  for i in range(0, fila.qsize()):
+    res.append(fila.get())
+  print(res)
 
 # Caja1: Empieza a atender 10:01, y atiende a una persona cada 10 minutos
 # Caja2: Empieza a atender 10:03, atiende a una persona cada 4 minutos
